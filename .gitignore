@@ -1,0 +1,42 @@
+# .gitignore - Git'in takip ETMEYECEĞİ dosyalar
+
+# İşletim sistemi meta dosyaları
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Windows klasör önizleme dosyaları
+[Dd]esktop.ini
+
+# Editör ve IDE klasörleri
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Geçici dosyalar
+*.tmp
+*.temp
+*.log
+
+# Node.js (gelecekte kullanılabilir)
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Python (gelecekte kullanılabilir)
+__pycache__/
+*.py[cod]
+.env
+.venv/
+
+# Hassas bilgiler - ASLA git'e ekleme
+*.env
+*.env.local
+*.env.production
+secrets/

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="Corvix — Çoklu Hizmet Koordinasyon Altyapısı">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
+    <!-- Open Graph etiketleri - sosyal medya paylaşımları için -->
+    <meta property="og:title" content="CORVIX">
+    <meta property="og:description" content="Çoklu Hizmet Koordinasyon Altyapısı">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://corvix.com.tr">
+    <title>CORVIX</title>
+    <!-- Google Fonts - Inter yazı tipi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Temel sıfırlama stilleri */
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html{font-size:16px;-webkit-text-size-adjust:100%}
+
+        /* Ana body stilleri - siyah arka plan, tam ekran */
+        body{
+            font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+            background:#000;
+            color:#fff;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            overflow:hidden;
+            height:100vh;
+            height:100dvh;
+            display:flex;
+            flex-direction:column
+        }
+
+        /* Metin seçimi rengi */
+        ::selection{background:rgba(255,255,255,.15);color:#fff}
+
+        /* Dil seçici butonu - sağ üst köşe */
+        .lang{
+            position:fixed;
+            top:24px;
+            right:24px;
+            z-index:100;
+            display:flex;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:40px;
+            padding:3px;
+            gap:2px;
+            background:rgba(0,0,0,.6);
+            backdrop-filter:blur(16px);
+            -webkit-backdrop-filter:blur(16px)
+        }
+        .lang button{
+            padding:6px 14px;
+            border:none;
+            background:transparent;
+            color:rgba(255,255,255,.4);
+            font-family:'Inter',sans-serif;
+            font-size:.7rem;
+            font-weight:700;
+            letter-spacing:.12em;
+            text-transform:uppercase;
+            cursor:pointer;
+            border-radius:36px;
+            transition:.3s
+        }
+        /* Aktif dil butonu beyaz arka plan */
+        .lang button.on{background:#fff;color:#000}
+        .lang button:hover:not(.on){color:rgba(255,255,255,.7)}
+
+        /* Ana içerik alanı - ortaya hizalı */
+        main{
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            padding:24px;
+            position:relative
+        }
+
+        /* Arka plan ışıma efekti */
+        main::before{
+            content:'';
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:600px;
+            height:600px;
+            background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 70%);
+            pointer-events:none
+        }
+
+        /* CORVIX büyük marka adı */
+        .brand{
+            font-size:clamp(3.5rem,14vw,10rem);
+            font-weight:900;
+            letter-spacing:.3em;
+            text-transform:uppercase;
+            line-height:1;
+            color:#fff;
+            margin-bottom:20px;
+            animation:fadeIn 1s ease .2s both
+        }
+
+        /* Ana slogan metni */
+        .tagline{
+            font-size:clamp(.85rem,2vw,1.1rem);
+            font-weight:300;
+            color:rgba(255,255,255,.65);
+            letter-spacing:.15em;
+            text-transform:uppercase;
+            margin-bottom:6px;
+            animation:fadeIn 1s ease .5s both
+        }
+
+        /* İkinci slogan satırı */
+        .tagline2{
+            font-size:clamp(.75rem,1.6vw,.9rem);
+            font-weight:400;
+            color:rgba(255,255,255,.45);
+            letter-spacing:.1em;
+            text-transform:uppercase;
+            margin-bottom:28px;
+            animation:fadeIn 1s ease .6s both
+        }
+
+        /* Açıklama metni */
+        .desc{
+            max-width:580px;
+            font-size:.9rem;
+            font-weight:400;
+            color:rgba(255,255,255,.55);
+            line-height:1.8;
+            animation:fadeIn 1s ease .8s both
+        }
+
+        /* Tanım metni - çizgiyle ayrılmış */
+        .def{
+            max-width:580px;
+            font-size:.82rem;
+            font-weight:400;
+            color:rgba(255,255,255,.4);
+            line-height:1.7;
+            margin-top:20px;
+            padding-top:20px;
+            border-top:1px solid rgba(255,255,255,.08);
+            animation:fadeIn 1s ease 1s both
+        }
+
+        /* Footer alanı */
+        footer{
+            padding:20px 24px;
+            text-align:center;
+            border-top:1px solid rgba(255,255,255,.06);
+            display:flex;
+            flex-direction:column;
+            gap:6px;
+            animation:fadeIn 1s ease 1s both
+        }
+        footer .f-note{font-size:.72rem;font-weight:400;color:rgba(255,255,255,.4);letter-spacing:.04em}
+        footer .f-copy{font-size:.65rem;color:rgba(255,255,255,.25)}
+
+        /* Fade in animasyonu - aşağıdan yukarı kayarak belirme */
+        @keyframes fadeIn{
+            from{opacity:0;transform:translateY(16px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+
+        /* Mobil cihaz uyarlamaları */
+        @media(max-width:480px){
+            .lang{top:16px;right:16px}
+            .lang button{padding:5px 10px;font-size:.65rem}
+            .brand{letter-spacing:.18em}
+        }
+
+        /* Yazdırma stili */
+        @media print{
+            body{background:#fff;color:#000;overflow:visible;height:auto}
+            .lang{display:none}
+            .brand{color:#000}
+            .tagline,.tagline2,.desc,.def{color:#333}
+            footer .f-note,footer .f-copy{color:#666}
+        }
+    </style>
+</head>
+<body>
+    <!-- Dil seçici -->
+    <div class="lang">
+        <button class="on" data-l="tr" onclick="L('tr')">TR</button>
+        <button data-l="en" onclick="L('en')">EN</button>
+    </div>
+
+    <!-- Ana içerik -->
+    <main>
+        <h1 class="brand">CORVIX</h1>
+        <p class="tagline"
+           data-tr="Çoklu Hizmet Koordinasyon Altyapısı"
+           data-en="Multi-Service Coordination Infrastructure">Çoklu Hizmet Koordinasyon Altyapısı</p>
+        <p class="tagline2"
+           data-tr="Operasyonel Koordinasyon Katmanı"
+           data-en="Operational Coordination Layer">Operasyonel Koordinasyon Katmanı</p>
+        <p class="desc"
+           data-tr="Corvix; çoklu hizmetlerin, bağımsız operasyonel yapıların ve dağıtık varlıkların tek bir matrix tabanlı koordinasyon sistemi içerisinde birleşmesini sağlayan bir altyapıdır. Farklı bileşenlerin, birbirine bağlı bir hizmet ağı içerisinde uyumlu şekilde çalışmasına imkân tanır."
+           data-en="Corvix is an infrastructure that enables the unification of multiple services, independent operational structures, and distributed assets within a single matrix-based coordination system. It allows different components to work harmoniously within an interconnected service network.">Corvix; çoklu hizmetlerin, bağımsız operasyonel yapıların ve dağıtık varlıkların tek bir matrix tabanlı koordinasyon sistemi içerisinde birleşmesini sağlayan bir altyapıdır. Farklı bileşenlerin, birbirine bağlı bir hizmet ağı içerisinde uyumlu şekilde çalışmasına imkân tanır.</p>
+        <p class="def"
+           data-tr="Corvix = Çoklu hizmetlerin ve farklı operasyonel varlıkların birleşik bir matrix sistemi içerisinde koordine edildiği altyapı katmanıdır."
+           data-en="Corvix = The infrastructure layer where multiple services and different operational assets are coordinated within a unified matrix system.">Corvix = Çoklu hizmetlerin ve farklı operasyonel varlıkların birleşik bir matrix sistemi içerisinde koordine edildiği altyapı katmanıdır.</p>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p class="f-note"
+           data-tr="Yakında tüm marka detayları paylaşılacaktır."
+           data-en="Full brand details will be shared soon.">Yakında tüm marka detayları paylaşılacaktır.</p>
+        <p class="f-copy">&copy; 2026 Corvix. <span data-tr="Tüm hakları saklıdır." data-en="All rights reserved.">Tüm hakları saklıdır.</span></p>
+    </footer>
+
+    <!-- Dil değiştirme JavaScript fonksiyonu -->
+    <script>
+        function L(l){
+            // HTML lang attribute'unu güncelle
+            document.documentElement.lang = l;
+            // Buton aktif sınıfını güncelle
+            document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
+            // data-tr / data-en attribute'larına göre metinleri güncelle
+            document.querySelectorAll('[data-tr][data-en]').forEach(e => { e.textContent = e.getAttribute('data-' + l) });
+        }
+    </script>
+</body>
+</html>
