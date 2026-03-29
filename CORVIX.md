@@ -119,9 +119,20 @@ corvix/
 ├── .gitignore             ← Git takip dışı dosyalar
 │
 ├── web/                   ← 🌐 Ana web sitesi
-│   ├── index.html         ← Coming Soon sayfası (TR/EN)
+│   ├── index.html         ← Coming Soon sayfası (TR/EN, responsive)
 │   ├── nginx.conf         ← Nginx sunucu yapılandırması
-│   └── Dockerfile         ← Web-specific Docker imajı
+│   ├── Dockerfile         ← Web-specific Docker imajı
+│   ├── site.webmanifest   ← PWA manifest (Android/Chrome)
+│   ├── browserconfig.xml  ← Microsoft Edge/Windows tile config
+│   └── assets/            ← 🖼️ Statik dosyalar
+│       ├── favicon.ico            ← Çoklu boyut ICO (16+32+48)
+│       ├── favicon-16x16.png      ← Tarayıcı sekmesi (küçük)
+│       ├── favicon-32x32.png      ← Tarayıcı sekmesi (standart)
+│       ├── favicon-48x48.png      ← Tarayıcı sekmesi (büyük)
+│       ├── apple-touch-icon.png   ← iOS ana ekran (180x180)
+│       ├── android-chrome-*.png   ← Android Chrome (192+512)
+│       ├── mstile-150x150.png     ← Windows tile
+│       └── og-image.png           ← Sosyal medya paylaşım görseli
 │
 └── .corvix/               ← 🧠 Marka hafızası & strateji
     ├── brand.md           ← Marka vizyonu, renkler, tipografi
@@ -143,6 +154,12 @@ corvix/
 - [x] DNS ayarları yapıldı (A + CNAME kayıtları)
 - [x] SSL sertifikası aktif (Let's Encrypt)
 - [x] www ve non-www yönlendirmesi düzeltildi
+- [x] Favicon seti eklendi (tüm platformlar: iOS, Android, Windows, tarayıcılar)
+- [x] Responsive tasarım düzeltildi (320px-1920px tam uyum)
+- [x] Dil seçici UX/UI iyileştirildi (header'a taşındı, erişilebilirlik)
+- [x] OG/Twitter meta etiketleri eklendi (sosyal medya paylaşımları)
+- [x] PWA manifest + browserconfig.xml eklendi
+- [x] Dil tercihi localStorage ile hatırlanır
 
 ### 🔄 Devam Edenler
 - [ ] Markaa brief'i hazırlanacak (hedef kitle, tonlama, rakipler)
@@ -206,6 +223,25 @@ corvix/
 - **Çözüm:** Coolify Domains alanı `https://corvix.com.tr,https://www.corvix.com.tr` olarak güncellendi
 - **Öğrenilen:** Coolify'da her zaman www'lu ve www'suz versiyonları virgülle ayırarak birlikte ekle
 - **Commit:** Yapılandırma değişikliği (Coolify panel üzerinden)
+
+---
+
+### 2026-03-29 — Favicon + Responsive + UX İyileştirmesi
+- **Yapılan:** Sayfanın tüm ekran boyutlarına uyumu sağlandı, favicon eklendi, dil seçici UX iyileştirildi
+- **Sorunlar:**
+  - 320px ve 375px ekranlarda dil seçici (TR/EN) "CORVIX" yazısının üzerine biniyordu
+  - Favicon yoktu — tarayıcı sekmesinde boş ikon görünüyordu
+  - `overflow:hidden` yüzünden küçük ekranlarda scroll yapılamıyordu
+  - Dil tercihi sayfa yenilenince sıfırlanıyordu
+- **Çözümler:**
+  1. **Favicon seti** — 12 farklı boyutta favicon oluşturuldu (ICO, PNG, Apple Touch Icon, Android Chrome, MS Tile, OG Image)
+  2. **Dil seçici** — `position:fixed`'den `header` elementine taşındı (akış içinde, çakışma yok)
+  3. **Responsive** — `clamp()` ile letter-spacing ve font-size dinamik hale getirildi; 4 breakpoint eklendi (768, 480, 360, landscape)
+  4. **Erişilebilirlik** — `aria-label`, `focus-visible`, `prefers-reduced-motion` ve min 44px tıklama alanı eklendi
+  5. **UX** — `localStorage` ile dil tercihi hatırlanır, `overflow:hidden` kaldırılarak küçük ekranlarda scroll sağlandı
+  6. **SEO** — OG Image, Twitter Card, PWA manifest, browserconfig.xml eklendi
+- **Eklenen dosyalar:** `web/assets/` (12 favicon), `web/site.webmanifest`, `web/browserconfig.xml`
+- **Commit:** `456c612` — `feat: favicon + responsive + UX iyilestirmesi`
 
 ---
 
