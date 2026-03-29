@@ -3,211 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <meta name="description" content="Corvix — Çoklu Hizmet Koordinasyon Altyapısı">
+    <meta name="description" content="Corvix — Çoklu Hizmet Koordinasyon Altyapısı. Yazılım, Marketing, Medya ve Dijital Hizmetler.">
     <meta name="theme-color" content="#000000">
     <meta name="color-scheme" content="dark">
-    <!-- Open Graph etiketleri - sosyal medya paylaşımları için -->
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+
+    <!-- Open Graph — Sosyal medya paylaşımları için -->
     <meta property="og:title" content="CORVIX">
-    <meta property="og:description" content="Çoklu Hizmet Koordinasyon Altyapısı">
+    <meta property="og:description" content="Çoklu Hizmet Koordinasyon Altyapısı — Yazılım · Marketing · Medya · Dijital Hizmetler">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://corvix.com.tr">
+    <meta property="og:image" content="https://corvix.com.tr/assets/og-image.png">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="CORVIX">
+    <meta name="twitter:description" content="Çoklu Hizmet Koordinasyon Altyapısı">
+    <meta name="twitter:image" content="https://corvix.com.tr/assets/og-image.png">
+
     <title>CORVIX</title>
-    <!-- Google Fonts - Inter yazı tipi -->
+
+    <!-- Favicon — Tüm platformlar ve tarayıcılar için -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <!-- Apple iOS — Ana ekrana ekleme ikonu -->
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png">
+    <!-- Android Chrome — PWA manifest -->
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Google Fonts — Inter yazı tipi -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        /* Temel sıfırlama stilleri */
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        html{font-size:16px;-webkit-text-size-adjust:100%}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
-        /* Ana body stilleri - siyah arka plan, tam ekran */
-        body{
-            font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-            background:#000;
-            color:#fff;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
-            overflow:hidden;
-            height:100vh;
-            height:100dvh;
-            display:flex;
-            flex-direction:column
+    <style>
+        /* ═══════════════════════════════════════
+           TEMEL SIFIRLAMA
+           ═══════════════════════════════════════ */
+        *,*::before,*::after { margin:0; padding:0; box-sizing:border-box }
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            /* Kaydırma çubuğu her zaman smooth olsun */
+            scroll-behavior: smooth;
+        }
+
+        /* ═══════════════════════════════════════
+           BODY — Tam ekran siyah arka plan
+           ═══════════════════════════════════════ */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            /* overflow:hidden KALDIRILDI — küçük ekranlarda scroll gerekli */
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Metin seçimi rengi */
-        ::selection{background:rgba(255,255,255,.15);color:#fff}
+        ::selection { background: rgba(255,255,255,.15); color: #fff }
 
-        /* Dil seçici butonu - sağ üst köşe */
-        .lang{
-            position:fixed;
-            top:24px;
-            right:24px;
-            z-index:100;
-            display:flex;
-            border:1px solid rgba(255,255,255,.12);
-            border-radius:40px;
-            padding:3px;
-            gap:2px;
-            background:rgba(0,0,0,.6);
-            backdrop-filter:blur(16px);
-            -webkit-backdrop-filter:blur(16px)
-        }
-        .lang button{
-            padding:6px 14px;
-            border:none;
-            background:transparent;
-            color:rgba(255,255,255,.4);
-            font-family:'Inter',sans-serif;
-            font-size:.7rem;
-            font-weight:700;
-            letter-spacing:.12em;
-            text-transform:uppercase;
-            cursor:pointer;
-            border-radius:36px;
-            transition:.3s
-        }
-        /* Aktif dil butonu beyaz arka plan */
-        .lang button.on{background:#fff;color:#000}
-        .lang button:hover:not(.on){color:rgba(255,255,255,.7)}
-
-        /* Ana içerik alanı - ortaya hizalı */
-        main{
-            flex:1;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            text-align:center;
-            padding:24px;
-            position:relative
+        /* ═══════════════════════════════════════
+           HEADER — Dil seçici için sabit üst alan
+           Artık fixed değil, flow içinde yer alıyor.
+           Böylece hiçbir ekran boyutunda içerikle çakışmaz.
+           ═══════════════════════════════════════ */
+        header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 24px;
+            /* Header görünmez ama yer kaplar */
+            flex-shrink: 0;
         }
 
-        /* Arka plan ışıma efekti */
-        main::before{
-            content:'';
-            position:absolute;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
-            width:600px;
-            height:600px;
-            background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 70%);
-            pointer-events:none
+        /* ═══════════════════════════════════════
+           DİL SEÇİCİ — Modern pill toggle tasarım
+           UX: Açık, tıklanabilir alanlar, iyi kontrast
+           ═══════════════════════════════════════ */
+        .lang {
+            display: flex;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 40px;
+            padding: 3px;
+            gap: 2px;
+            background: rgba(255,255,255,.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            /* Animasyonla görünme */
+            animation: fadeIn .8s ease .2s both;
         }
 
-        /* CORVIX büyük marka adı */
-        .brand{
-            font-size:clamp(3.5rem,14vw,10rem);
-            font-weight:900;
-            letter-spacing:.3em;
-            text-transform:uppercase;
-            line-height:1;
-            color:#fff;
-            margin-bottom:20px;
-            animation:fadeIn 1s ease .2s both
+        .lang button {
+            /* Minimum tıklama alanı 44px (Apple HIG / WCAG 2.5.5) */
+            min-width: 44px;
+            min-height: 36px;
+            padding: 6px 16px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,.4);
+            font-family: 'Inter', sans-serif;
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 36px;
+            transition: all .3s cubic-bezier(.4, 0, .2, 1);
+            /* Focus state — erişilebilirlik */
+            outline: none;
         }
 
-        /* Ana slogan metni */
-        .tagline{
-            font-size:clamp(.85rem,2vw,1.1rem);
-            font-weight:300;
-            color:rgba(255,255,255,.65);
-            letter-spacing:.15em;
-            text-transform:uppercase;
-            margin-bottom:6px;
-            animation:fadeIn 1s ease .5s both
+        /* Aktif dil — beyaz arka plan, siyah yazı */
+        .lang button.on {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 1px 4px rgba(0,0,0,.3);
         }
 
-        /* İkinci slogan satırı */
-        .tagline2{
-            font-size:clamp(.75rem,1.6vw,.9rem);
-            font-weight:400;
-            color:rgba(255,255,255,.45);
-            letter-spacing:.1em;
-            text-transform:uppercase;
-            margin-bottom:28px;
-            animation:fadeIn 1s ease .6s both
+        .lang button:hover:not(.on) {
+            color: rgba(255,255,255,.7);
+            background: rgba(255,255,255,.06);
         }
 
-        /* Açıklama metni */
-        .desc{
-            max-width:580px;
-            font-size:.9rem;
-            font-weight:400;
-            color:rgba(255,255,255,.55);
-            line-height:1.8;
-            animation:fadeIn 1s ease .8s both
+        /* Klavye focus göstergesi (erişilebilirlik) */
+        .lang button:focus-visible {
+            outline: 2px solid rgba(255,255,255,.5);
+            outline-offset: 2px;
         }
 
-        /* Tanım metni - çizgiyle ayrılmış */
-        .def{
-            max-width:580px;
-            font-size:.82rem;
-            font-weight:400;
-            color:rgba(255,255,255,.4);
-            line-height:1.7;
-            margin-top:20px;
-            padding-top:20px;
-            border-top:1px solid rgba(255,255,255,.08);
-            animation:fadeIn 1s ease 1s both
+        /* ═══════════════════════════════════════
+           ANA İÇERİK — Dikey ortala, responsive padding
+           ═══════════════════════════════════════ */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* Responsive padding — kenarlardan yeterli boşluk */
+            padding: 24px clamp(16px, 5vw, 48px);
+            position: relative;
         }
 
-        /* Footer alanı */
-        footer{
-            padding:20px 24px;
-            text-align:center;
-            border-top:1px solid rgba(255,255,255,.06);
-            display:flex;
-            flex-direction:column;
-            gap:6px;
-            animation:fadeIn 1s ease 1s both
-        }
-        footer .f-note{font-size:.72rem;font-weight:400;color:rgba(255,255,255,.4);letter-spacing:.04em}
-        footer .f-copy{font-size:.65rem;color:rgba(255,255,255,.25)}
-
-        /* Fade in animasyonu - aşağıdan yukarı kayarak belirme */
-        @keyframes fadeIn{
-            from{opacity:0;transform:translateY(16px)}
-            to{opacity:1;transform:translateY(0)}
+        /* Arka plan ışıma efekti — ortadan yayılan soluk beyaz */
+        main::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(600px, 100vw);
+            height: min(600px, 100vh);
+            background: radial-gradient(circle, rgba(255,255,255,.03) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        /* Mobil cihaz uyarlamaları */
-        @media(max-width:480px){
-            .lang{top:16px;right:16px}
-            .lang button{padding:5px 10px;font-size:.65rem}
-            .brand{letter-spacing:.18em}
+        /* ═══════════════════════════════════════
+           CORVIX MARKA ADI — Responsive tipografi
+           clamp() ile her ekran boyutunda okunabilir
+           ═══════════════════════════════════════ */
+        .brand {
+            /* Min 2.2rem (küçük mobil), ideal 10vw, max 8rem (büyük ekran) */
+            font-size: clamp(2.2rem, 10vw, 8rem);
+            font-weight: 900;
+            /* Letter-spacing de responsive — küçük ekranda dar, büyükte geniş */
+            letter-spacing: clamp(.08em, 2vw, .3em);
+            text-transform: uppercase;
+            line-height: 1;
+            color: #fff;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease .3s both;
+            /* Taşma engelleme */
+            word-break: break-word;
+            max-width: 100%;
         }
 
-        /* Yazdırma stili */
-        @media print{
-            body{background:#fff;color:#000;overflow:visible;height:auto}
-            .lang{display:none}
-            .brand{color:#000}
-            .tagline,.tagline2,.desc,.def{color:#333}
-            footer .f-note,footer .f-copy{color:#666}
+        /* ═══════════════════════════════════════
+           SLOGAN METİNLERİ
+           ═══════════════════════════════════════ */
+        .tagline {
+            font-size: clamp(.75rem, 1.8vw, 1.05rem);
+            font-weight: 300;
+            color: rgba(255,255,255,.6);
+            letter-spacing: clamp(.06em, 1vw, .15em);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            animation: fadeIn 1s ease .5s both;
+            max-width: 90vw;
+        }
+
+        .tagline2 {
+            font-size: clamp(.68rem, 1.4vw, .85rem);
+            font-weight: 400;
+            color: rgba(255,255,255,.4);
+            letter-spacing: clamp(.04em, .8vw, .1em);
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            animation: fadeIn 1s ease .6s both;
+            max-width: 90vw;
+        }
+
+        /* ═══════════════════════════════════════
+           AÇIKLAMA METNİ
+           ═══════════════════════════════════════ */
+        .desc {
+            max-width: min(580px, 90vw);
+            font-size: clamp(.82rem, 1.2vw, .92rem);
+            font-weight: 400;
+            color: rgba(255,255,255,.5);
+            line-height: 1.8;
+            animation: fadeIn 1s ease .8s both;
+        }
+
+        /* ═══════════════════════════════════════
+           TANIM METNİ — İnce çizgiyle ayrılmış
+           ═══════════════════════════════════════ */
+        .def {
+            max-width: min(580px, 90vw);
+            font-size: clamp(.75rem, 1.1vw, .84rem);
+            font-weight: 400;
+            color: rgba(255,255,255,.35);
+            line-height: 1.7;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.07);
+            animation: fadeIn 1s ease 1s both;
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════ */
+        footer {
+            padding: 20px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,.05);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            animation: fadeIn 1s ease 1s both;
+            flex-shrink: 0;
+        }
+
+        footer .f-note {
+            font-size: .72rem;
+            font-weight: 400;
+            color: rgba(255,255,255,.35);
+            letter-spacing: .03em;
+        }
+
+        footer .f-copy {
+            font-size: .65rem;
+            color: rgba(255,255,255,.2);
+        }
+
+        /* ═══════════════════════════════════════
+           ANİMASYON — Aşağıdan yukarı kayarak belirme
+           ═══════════════════════════════════════ */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px) }
+            to { opacity: 1; transform: translateY(0) }
+        }
+
+        /* ═══════════════════════════════════════
+           TABLET (max 768px)
+           ═══════════════════════════════════════ */
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 20px;
+            }
+
+            main {
+                /* Tablet'te biraz daha az dikey alan yeterli */
+                padding-top: 12px;
+                padding-bottom: 24px;
+            }
+
+            .brand {
+                margin-bottom: 16px;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           MOBİL (max 480px)
+           ═══════════════════════════════════════ */
+        @media (max-width: 480px) {
+            header {
+                /* Mobilde ortala — daha UX uyumlu */
+                justify-content: center;
+                padding: 14px 16px;
+            }
+
+            .lang button {
+                padding: 5px 14px;
+                font-size: .68rem;
+            }
+
+            main {
+                padding-top: 8px;
+            }
+
+            .brand {
+                margin-bottom: 14px;
+            }
+
+            .tagline2 {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           ÇOK KÜÇÜK MOBİL (max 360px)
+           Eski telefonlar, SE modelleri
+           ═══════════════════════════════════════ */
+        @media (max-width: 360px) {
+            header {
+                padding: 12px 12px;
+            }
+
+            .brand {
+                margin-bottom: 12px;
+            }
+
+            .tagline {
+                margin-bottom: 4px;
+            }
+
+            .tagline2 {
+                margin-bottom: 16px;
+            }
+
+            .desc {
+                line-height: 1.7;
+            }
+
+            footer {
+                padding: 14px 16px;
+                gap: 4px;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           YATAY MOBİL (landscape)
+           Kısa yükseklik — scroll gerekebilir
+           ═══════════════════════════════════════ */
+        @media (max-height: 500px) {
+            main {
+                justify-content: flex-start;
+                padding-top: 16px;
+            }
+
+            .brand {
+                font-size: clamp(2rem, 8vw, 4rem);
+                margin-bottom: 10px;
+            }
+
+            .tagline2 {
+                margin-bottom: 14px;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           YAZDIR — Beyaz arka plan, siyah metin
+           ═══════════════════════════════════════ */
+        @media print {
+            body { background: #fff; color: #000; overflow: visible; height: auto }
+            header { display: none }
+            .brand { color: #000 }
+            .tagline, .tagline2, .desc, .def { color: #333 }
+            footer .f-note, footer .f-copy { color: #666 }
+        }
+
+        /* ═══════════════════════════════════════
+           HAREKETSİZ MOD — Kullanıcı animasyonu kapattıysa
+           ═══════════════════════════════════════ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Dil seçici -->
-    <div class="lang">
-        <button class="on" data-l="tr" onclick="L('tr')">TR</button>
-        <button data-l="en" onclick="L('en')">EN</button>
-    </div>
+
+    <!-- Üst bilgi — Dil seçici buraya taşındı -->
+    <header>
+        <nav class="lang" role="navigation" aria-label="Dil seçici">
+            <button class="on" data-l="tr" onclick="L('tr')" aria-label="Türkçe" title="Türkçe">TR</button>
+            <button data-l="en" onclick="L('en')" aria-label="English" title="English">EN</button>
+        </nav>
+    </header>
 
     <!-- Ana içerik -->
     <main>
         <h1 class="brand">CORVIX</h1>
+
         <p class="tagline"
            data-tr="Çoklu Hizmet Koordinasyon Altyapısı"
            data-en="Multi-Service Coordination Infrastructure">Çoklu Hizmet Koordinasyon Altyapısı</p>
+
         <p class="tagline2"
            data-tr="Operasyonel Koordinasyon Katmanı"
            data-en="Operational Coordination Layer">Operasyonel Koordinasyon Katmanı</p>
+
         <p class="desc"
            data-tr="Corvix; çoklu hizmetlerin, bağımsız operasyonel yapıların ve dağıtık varlıkların tek bir matrix tabanlı koordinasyon sistemi içerisinde birleşmesini sağlayan bir altyapıdır. Farklı bileşenlerin, birbirine bağlı bir hizmet ağı içerisinde uyumlu şekilde çalışmasına imkân tanır."
            data-en="Corvix is an infrastructure that enables the unification of multiple services, independent operational structures, and distributed assets within a single matrix-based coordination system. It allows different components to work harmoniously within an interconnected service network.">Corvix; çoklu hizmetlerin, bağımsız operasyonel yapıların ve dağıtık varlıkların tek bir matrix tabanlı koordinasyon sistemi içerisinde birleşmesini sağlayan bir altyapıdır. Farklı bileşenlerin, birbirine bağlı bir hizmet ağı içerisinde uyumlu şekilde çalışmasına imkân tanır.</p>
+
         <p class="def"
            data-tr="Corvix = Çoklu hizmetlerin ve farklı operasyonel varlıkların birleşik bir matrix sistemi içerisinde koordine edildiği altyapı katmanıdır."
            data-en="Corvix = The infrastructure layer where multiple services and different operational assets are coordinated within a unified matrix system.">Corvix = Çoklu hizmetlerin ve farklı operasyonel varlıkların birleşik bir matrix sistemi içerisinde koordine edildiği altyapı katmanıdır.</p>
@@ -221,16 +436,35 @@
         <p class="f-copy">&copy; 2026 Corvix. <span data-tr="Tüm hakları saklıdır." data-en="All rights reserved.">Tüm hakları saklıdır.</span></p>
     </footer>
 
-    <!-- Dil değiştirme JavaScript fonksiyonu -->
+    <!-- Dil değiştirme ve HTML lang güncelleme -->
     <script>
-        function L(l){
-            // HTML lang attribute'unu güncelle
+        function L(l) {
+            // HTML lang attribute'unu güncelle (SEO ve erişilebilirlik için)
             document.documentElement.lang = l;
+
             // Buton aktif sınıfını güncelle
-            document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
+            document.querySelectorAll('.lang button').forEach(function(b) {
+                b.classList.toggle('on', b.dataset.l === l);
+            });
+
             // data-tr / data-en attribute'larına göre metinleri güncelle
-            document.querySelectorAll('[data-tr][data-en]').forEach(e => { e.textContent = e.getAttribute('data-' + l) });
+            document.querySelectorAll('[data-tr][data-en]').forEach(function(e) {
+                e.textContent = e.getAttribute('data-' + l);
+            });
+
+            // Tercihi localStorage'a kaydet (kullanıcı geri geldiğinde hatırla)
+            try { localStorage.setItem('corvix-lang', l); } catch(e) {}
         }
+
+        // Sayfa yüklendiğinde kaydedilmiş dil tercihini yükle
+        (function() {
+            try {
+                var saved = localStorage.getItem('corvix-lang');
+                if (saved && (saved === 'tr' || saved === 'en')) {
+                    L(saved);
+                }
+            } catch(e) {}
+        })();
     </script>
 </body>
 </html>
